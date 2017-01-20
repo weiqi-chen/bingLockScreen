@@ -1,7 +1,7 @@
 # bingLockScreen
 My python script to get Bing Today homepage and set it as your lock screen ( for windows 7 )
 
-You can set it as a task from `Task Scheduler`, And Update your lock screen of your Windows 7.
+You can set it as a task from `Task Scheduler`, And Update your lock screen of your Windows 7 daily and automatically .
 
 The script will setup the register and files.
 
