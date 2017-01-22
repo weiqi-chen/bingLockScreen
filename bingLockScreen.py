@@ -5,7 +5,7 @@ import winreg
 import urllib.request
 import json
 import os
-import struct
+import platform
 
 # 必应获取美图的API：
 # （无水印）http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1
@@ -29,7 +29,7 @@ def get_bing_today_homepage():
 def set_up_windows_7_oem_background_reg():
     mid_key_str = 'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\Background'
     target_key_name = 'OEMBackground'
-    top_key = winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, mid_key_str)
+    top_key = winreg.CreateKeyEx(winreg.HKEY_LOCAL_MACHINE, mid_key_str, access=winreg.KEY_ALL_ACCESS|winreg.KEY_WOW64_64KEY)
     winreg.SetValueEx(top_key, target_key_name, 0, winreg.REG_DWORD, 1)
 
 
@@ -37,7 +37,7 @@ def set_up_windows_7_oem_background_file():
     bing_today_homepage = get_bing_today_homepage()
     _a = os.environ['WINDIR'] + '\\'
     #32 bit python.exe running on a windows 64 bit system
-    if os.environ['PROCESSOR_ARCHITECTURE']=='AMD64' and struct.calcsize('P') == 4 :
+    if platform.machine()=='AMD64' and platform.architecture()[0]=='32bit' :
         _b = 'Sysnative\\'
     else:
         _b = 'System32\\'
