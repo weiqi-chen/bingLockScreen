@@ -28,9 +28,29 @@ The script has not been test for a long time, And it is writted in python3. So y
 
 # Installation
 
+0. Download and install Python3.
 1. Download the `bingLockScreen.py` by clicking `Clone or download` -> `Download ZIP`.
 2. Unzip and copy `bingLockScreen.py` to `C:\bingLockScreen.py`.
 3. Setup a task scheduler.
+
+## Setup Python
+
+Download Python3 from [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/). I recommend that you install the same architecture software, which means installing python3 64bit on 64bit Windows OS. 
+
+### Install Pillow python package(recommend)
+
+> Some times, The size of the image file that is provided by Bing Today Homepage is bigger then 300k Byte(1k=1024). Those pictures are too big and can't not be accepted by Microsoft Login UI.
+
+Install pillow and let `bingLockScreen.py` resize the file if needed.
+
+I assume that you have Python installed "C:\Program Files (x86)\Python36-32\python.exe"
+If you install python in your home directory(C:\Users\<your user name>\AppData), You don't need to run python with highest privileges
+
+> You may want run cmd first, then type the command line below.
+
+```
+C:\Program Files (x86)\Python36-32\python.exe" -m pip install pillow
+```
 
 ## Hot to setup the Task Scheduler?
 
@@ -67,11 +87,30 @@ You had better check the option "Run task as soon as possible after a scheduled 
 ![task_scheduler_setttings.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/task_scheduler_setttings.png)
 
 # 安装
- 
+
+0. 下载并安装Python3；
 1. 通过点击`Clone or download` -> `Download ZIP`来下载`bingLockScreen.py`；
 2. 解压缩并复制文件`bingLockScreen.py`到这里`C:\bingLockScreen.py`；
-3. 创建一个任务计划
+3. 创建一个任务计划。
  
+## 安装Python
+
+从[https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)下载Python3。推荐安装同一架构的软件，即在64位的操作系统安装64位的Python3。
+
+### 安装Pillow软件包（推荐）
+
+> 有时候，必应美图文件大小可达300K字节（1K=1024），这样的文件对于微软登录界面来说太大了无法接受。
+
+安装Pillow并允许`bingLockScreen.py`在需要的时候缩小照片文件体积。
+我假定你的Python安装在："C:\Program Files (x86)\Python36-32\python.exe"
+如果你在家目录安装(C:\Users\<your user name>\AppData)安装Python，则无需以管理员权限运行Python。
+
+> 你或许需要先打开cmd，键入并执行下面的命令。
+
+```
+C:\Program Files (x86)\Python36-32\python.exe" -m pip install pillow
+```
+
 ## 如何创建任务计划？
  
 1. 以管理员权限运行运行命令行提示符(CMD)；
