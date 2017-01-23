@@ -16,6 +16,11 @@ import platform
 
 test = False
 
+def reduce_the_size(name):
+    import PIL.Image
+    im = PIL.Image.open(name)
+    im.resize((1366,768)).save(name)
+
 
 def get_bing_today_homepage():
     # 使用CN域名网速会快一些。
@@ -51,6 +56,9 @@ def set_up_windows_7_oem_background_file():
     if test == True:
         win7_oobe = 'D:\\test.jpg'
     urllib.request.urlretrieve(bing_today_homepage, win7_oobe)
+    if os.path.getsize(win7_oobe) > 300*1024:
+        reduce_the_size(win7_oobe)
+
 
 
 if __name__ == '__main__':
