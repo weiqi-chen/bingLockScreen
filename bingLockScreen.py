@@ -16,10 +16,15 @@ import platform
 
 test = False
 
+
 def reduce_the_size(name):
     import PIL.Image
     im = PIL.Image.open(name)
-    im.resize((1366,768)).save(name)
+    im.resize((1366, 768)).save(name)
+    if os.path.getsize(name) >= 255 * 1024:
+        im.resize((1280, 720)).save(name)
+    if os.path.getsize(name) >= 255 * 1024:
+        im.resize((960, 540)).save(name)
 
 
 def get_bing_today_homepage():
@@ -34,15 +39,16 @@ def get_bing_today_homepage():
 def set_up_windows_7_oem_background_reg():
     mid_key_str = 'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\Background'
     target_key_name = 'OEMBackground'
-    top_key = winreg.CreateKeyEx(winreg.HKEY_LOCAL_MACHINE, mid_key_str, access=winreg.KEY_ALL_ACCESS|winreg.KEY_WOW64_64KEY)
+    top_key = winreg.CreateKeyEx(winreg.HKEY_LOCAL_MACHINE, mid_key_str,
+                                 access=winreg.KEY_ALL_ACCESS | winreg.KEY_WOW64_64KEY)
     winreg.SetValueEx(top_key, target_key_name, 0, winreg.REG_DWORD, 1)
 
 
 def set_up_windows_7_oem_background_file():
     bing_today_homepage = get_bing_today_homepage()
     _a = os.environ['WINDIR'] + '\\'
-    #32 bit python.exe running on a windows 64 bit system
-    if platform.machine()=='AMD64' and platform.architecture()[0]=='32bit' :
+    # 32 bit python.exe running on a windows 64 bit system
+    if platform.machine() == 'AMD64' and platform.architecture()[0] == '32bit':
         _b = 'Sysnative\\'
     else:
         _b = 'System32\\'
@@ -56,9 +62,8 @@ def set_up_windows_7_oem_background_file():
     if test == True:
         win7_oobe = 'D:\\test.jpg'
     urllib.request.urlretrieve(bing_today_homepage, win7_oobe)
-    if os.path.getsize(win7_oobe) > 300*1024:
+    if os.path.getsize(win7_oobe) >= 255 * 1024:
         reduce_the_size(win7_oobe)
-
 
 
 if __name__ == '__main__':
