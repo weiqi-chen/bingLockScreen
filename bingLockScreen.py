@@ -114,7 +114,7 @@ if __name__ == '__main__':
     if system.lower() == 'Windows'.lower():
         import winreg
         win_release = platform.win32_ver()[0]
-        if win_release == 7:
+        if win_release == '7':
             set_up_windows_7_oem_background_reg()
             set_up_windows_7_oem_background_file()
         else:
