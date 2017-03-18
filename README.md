@@ -165,13 +165,13 @@ schtasks /create /np /rl HIGHEST  /sc DAILY /tn bingLockScreen /tr "C:\Python34\
 
 通常，你都不需要修改位于“通用”和“触发器”标签下方的设置。
 
-![task_scheduler_general.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/task_scheduler_general.png)
-![task_scheduler_trigger.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/task_scheduler_trigger.png)
+![task_scheduler_general.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/task_scheduler_general.png)
+![task_scheduler_trigger.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/task_scheduler_trigger.png)
 
 确保你给`python`和`bingLockScreen.py`指定正确的路径。
 
-![task_scheduler_actions.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/task_scheduler_actions.png)
+![task_scheduler_actions.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/task_scheduler_actions.png)
 
 你最好就勾选位于“设置”的复选项"如果过了计划开始时间，立即启动任务"。
 
-![task_scheduler_setttings.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/task_scheduler_setttings.png)
+![task_scheduler_setttings.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/task_scheduler_setttings.png)
