@@ -69,7 +69,43 @@ def set_up_linux_background_file():
 
 
 def set_up_ubuntu_lightdm_settting():
-    pass
+    global dist_ver
+    major_ver = int(dist_ver)
+    if major_ver<=14:
+        print( "14.x version")
+    elif major_ver==16:
+        import configparser
+        print( "16.x version")
+        # [com.canonical.unity-greeter]
+        # draw-user-backgrounds=false
+        # background='/foo/wallpaper.png'
+        c_section = 'com.canonical.unity-greeter'
+
+        config_path = '/usr/share/glib-2.0/schemas/10_unity-settings-daemon.gschema.override'
+        config = configparser.ConfigParser()
+        config.read( config_path)
+        need_to_compile_schemas = False
+        if c_section not in config:
+            need_to_compile_schemas = True
+            config.add_section('com.canonical.unity-greeter')
+            config['com.canonical.unity-greeter'] = 'false'
+            config['background'] = "'/var/bing_lock_screen.jpg'"
+        else:
+            try:
+                if config['com.canonical.unity-greeter'] != 'false':
+                    config['com.canonical.unity-greeter'] = 'false'
+                    need_to_compile_schemas = True
+                if config['background'] != "'/var/bing_lock_screen.jpg'":
+                    config['background'] = "'/var/bing_lock_screen.jpg'"
+                    need_to_compile_schemas = True
+            except configparser.NoOptionError:
+                config['com.canonical.unity-greeter'] = 'false'
+                config['background'] = "'/var/bing_lock_screen.jpg'"
+                need_to_compile_schemas = True
+        if need_to_compile_schemas:
+            os.system("glib-compile-schemas /usr/share/glib-2.0/schemas/")
+            print("You need to restart lightdm to take effect.")
+
 
 
 if __name__ == '__main__':
