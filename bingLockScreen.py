@@ -7,14 +7,13 @@ import json
 import os
 import platform
 
+
 # 必应获取美图的API：
 # （无水印）http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1
 # 这里会包含一个包含图片资源URL的文本（JSON格式）
 # 上面的URL参数自行体验吧。
 # 资源{"images":[{"url":"xxxx"}]}
 
-
-test = False
 
 
 def reduce_the_size(name):
@@ -59,13 +58,37 @@ def set_up_windows_7_oem_background_file():
     if not os.path.exists(win7_oobe_dir):
         os.makedirs(win7_oobe_dir, exist_ok=True)
 
-    if test == True:
-        win7_oobe = 'D:\\test.jpg'
     urllib.request.urlretrieve(bing_today_homepage, win7_oobe)
     if os.path.getsize(win7_oobe) >= 255 * 1024:
         reduce_the_size(win7_oobe)
 
 
+def set_up_linux_background_file():
+    global bing_lock_screen_file
+    bing_today_homepage = get_bing_today_homepage()
+    urllib.request.urlretrieve(bing_today_homepage, bing_lock_screen_file)
+
+
+def set_up_ubuntu_lightdm_settting():
+    pass
+
+
 if __name__ == '__main__':
-    set_up_windows_7_oem_background_reg()
-    set_up_windows_7_oem_background_file()
+    system = platform.system()
+    if system.lower() == 'Windows'.lower():
+        win_release = platform.win32_ver()[0]
+        if win_release == 7:
+            set_up_windows_7_oem_background_reg()
+            set_up_windows_7_oem_background_file()
+        else:
+            print("Not Support version of Windows: {0}".format(win_release))
+            exit(1)
+    elif system.lower() == 'Linux'.lower():
+        linux_dist, dist_ver, dist_id = platform.dist()
+        bing_lock_screen_file = '/var/bing_lock_screen.jpg'
+        if linux_dist.lower() == 'Ubuntu'.lower():
+            set_up_ubuntu_lightdm_settting()
+        else:
+            print("Not Support version of Linux distribution: {0}".format(linux_dist))
+            exit(1)
+        set_up_linux_background_file()
