@@ -64,10 +64,10 @@ Refer to here: https://opencarnage.net/index.php?/topic/4444-custom-windows-7-lo
 You can modify the file by your self, or just use the file from `binary/authui.dll` from this repository.
 
 - Reboot your pc, then press `F8` and select "修复计算机(Repare Computer)"
-![authui_1](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/authui_1.png)
+  ![authui_1](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/authui_1.png)
 
 - Click "命令提示符(Command Prompt)"
-![authui_2](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/authui_2.png)
+  ![authui_2](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/authui_2.png)
 
 - Apply the patched file
 
@@ -106,16 +106,16 @@ Check the settings of the task(I marked the part with a red rectangle):
 
 Normally, You don't need to change the parts of settings in "General" and "Triggers".  
 
-![task_scheduler_general.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/task_scheduler_general.png)
-![task_scheduler_trigger.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/task_scheduler_trigger.png)
+![task_scheduler_general.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/task_scheduler_general.png)
+![task_scheduler_trigger.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/task_scheduler_trigger.png)
 
 Ensure you use set the right path of `python` and `bingLockScreen.py`.
 
-![task_scheduler_actions.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/task_scheduler_actions.png)
+![task_scheduler_actions.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/task_scheduler_actions.png)
 
 You had better check the option "Run task as soon as possible after a scheduled start is missed" from "Settings"
 
-![task_scheduler_setttings.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/task_scheduler_setttings.png)
+![task_scheduler_setttings.png](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/README.files/task_scheduler_setttings.png)
 
 # 安装
 
