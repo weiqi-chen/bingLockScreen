@@ -87,22 +87,23 @@ def set_up_ubuntu_lightdm_settting():
         need_to_compile_schemas = False
         if c_section not in config:
             need_to_compile_schemas = True
-            config.add_section('com.canonical.unity-greeter')
-            config[c_section]['com.canonical.unity-greeter'] = 'false'
+            config.add_section(c_section)
+            config[c_section]['draw-user-backgrounds'] = 'false'
             config[c_section]['background'] = "'/var/bing_lock_screen.jpg'"
         else:
             try:
-                if config[c_section]['com.canonical.unity-greeter'] != 'false':
-                    config[c_section]['com.canonical.unity-greeter'] = 'false'
+                if config[c_section]['draw-user-backgrounds'] != 'false':
+                    config[c_section]['draw-user-backgrounds'] = 'false'
                     need_to_compile_schemas = True
                 if config[c_section]['background'] != "'/var/bing_lock_screen.jpg'":
                     config[c_section]['background'] = "'/var/bing_lock_screen.jpg'"
                     need_to_compile_schemas = True
             except configparser.NoOptionError:
-                config[c_section]['com.canonical.unity-greeter'] = 'false'
+                config[c_section]['draw-user-backgrounds'] = 'false'
                 config[c_section]['background'] = "'/var/bing_lock_screen.jpg'"
                 need_to_compile_schemas = True
         if need_to_compile_schemas:
+            config.write(open(config_path,'w'))
             os.system("glib-compile-schemas /usr/share/glib-2.0/schemas/")
             print("You need to restart lightdm to take effect.")
 
