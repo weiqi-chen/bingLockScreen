@@ -98,7 +98,7 @@ def set_up_ubuntu_lightdm_settting():
                 if config[c_section]['background'] != "'/var/bing_lock_screen.jpg'":
                     config[c_section]['background'] = "'/var/bing_lock_screen.jpg'"
                     need_to_compile_schemas = True
-            except configparser.NoOptionError:
+            except KeyError:
                 config[c_section]['draw-user-backgrounds'] = 'false'
                 config[c_section]['background'] = "'/var/bing_lock_screen.jpg'"
                 need_to_compile_schemas = True
