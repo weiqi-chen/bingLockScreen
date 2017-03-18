@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-import winreg
 import urllib.request
 import json
 import os
@@ -76,6 +75,7 @@ def set_up_ubuntu_lightdm_settting():
 if __name__ == '__main__':
     system = platform.system()
     if system.lower() == 'Windows'.lower():
+        import winreg
         win_release = platform.win32_ver()[0]
         if win_release == 7:
             set_up_windows_7_oem_background_reg()
