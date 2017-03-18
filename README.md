@@ -37,9 +37,15 @@ The script has not been test for a long time, And it is writted in python3. So y
 
 Download Python3 from [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/). I recommend that you install the same architecture software, which means installing python3 64bit on 64bit Windows OS. 
 
-### Install Pillow python package(recommend)
 
-> Some times, The size of the image file that is provided by Bing Today Homepage is bigger then 300k Byte(1k=1024). Those pictures are too big and can't not be accepted by Microsoft Login UI.
+## Windows 7 Login UI Background picutre size limit
+
+For Windows 7, Microsoft set a limit that the size of image file to be set as a Login UI can't not exceed to 256k bytes.
+You can remove the limit by modifing file `authui.dll`, or just ensure that your picture files fit the rule.
+
+#### Install Pillow python package(recommend)
+
+> Some times, The size of the image file that is provided by Bing Today Homepage is bigger then 256k Byte(1k=1024). Those pictures are too big and can't not be accepted by Microsoft Login UI.
 
 Install pillow and let `bingLockScreen.py` resize the file if needed.
 
@@ -50,6 +56,23 @@ If you install python in your home directory(C:\Users\<your user name>\AppData),
 
 ```
 C:\Program Files (x86)\Python36-32\python.exe" -m pip install pillow
+```
+
+#### Modify System file `authui.dll` to remove the file size limit(advanced)
+
+Refer to here: https://opencarnage.net/index.php?/topic/4444-custom-windows-7-loginlock-background-with-256kb-limit-removal/
+You can modify the file by your self, or just use the file from `binary/authui.dll` from this repository.
+
+- Reboot your pc, then press `F8` and select "修复计算机(Repare Computer)"
+- Click "命令提示符(Command Prompt)"
+```
+x:\windows\system32>diskpart
+DISKPART> list volume
+<D volume is your system volume>
+DISKPART> exit
+x:\windows\system32>copy d:\authui.dll d:\Windows\System32\authui.dll
+replace  d:\Windows\System32\authui.dll ? <Yes/No/All>: yes
+copied         1 file.
 ```
 
 ## Hot to setup the Task Scheduler?
