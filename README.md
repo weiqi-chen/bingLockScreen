@@ -3,6 +3,7 @@ Result show in the picture
 效果如图
 
 ![example](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/example.png)
+![example](https://github.com/WeiqiChenCN/bingLockScreen/raw/master/example_2.png)
 
 # Bing Lock Screen
 
