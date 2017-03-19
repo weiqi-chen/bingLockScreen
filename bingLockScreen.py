@@ -26,7 +26,7 @@ def reduce_the_size(name):
         im.resize((960, 540)).save(name)
 
 
-def get_bing_today_homepage():
+def get_bing_today_homepage_url():
     # 使用CN域名网速会快一些。
     host_prefix = 'https://cn.bing.com'
     bing_api_url = '/HPImageArchive.aspx?format=js&idx=0&n=1'
@@ -39,10 +39,9 @@ def get_bing_today_homepage_data():
     count = 0
     while count < 5:
         try:
-            bing_today_homepage_url = get_bing_today_homepage()
+            bing_today_homepage_url = get_bing_today_homepage_url()
             return urllib.request.urlopen(bing_today_homepage_url).read()
-        except urllib.error.URLError as e :
-            print( e.reason() )
+        except :
             print("Try again.")
         time.sleep(10)
         count += 1
@@ -58,7 +57,7 @@ def set_up_windows_7_oem_background_reg():
 
 
 def set_up_windows_7_oem_background_file():
-    bing_today_homepage = get_bing_today_homepage()
+    bing_today_homepage = get_bing_today_homepage_url()
     _a = os.environ['WINDIR'] + '\\'
     # 32 bit python.exe running on a windows 64 bit system
     if platform.machine() == 'AMD64' and platform.architecture()[0] == '32bit':
