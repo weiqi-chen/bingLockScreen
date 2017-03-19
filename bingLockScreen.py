@@ -76,7 +76,7 @@ def set_up_windows_7_oem_background_file():
         os.makedirs(win7_oobe_dir, exist_ok=True)
     open( win7_oobe, 'wb').write(data)
 
-    sha1 = hashlib.sha1(open(_a+_b+"authui.dll").read())
+    sha1 = hashlib.sha1(open(_a+_b+"authui.dll","rb").read())
     hash = sha1.hexdigest()
 
     for i in win_7_authui_dll_sha1_list:
