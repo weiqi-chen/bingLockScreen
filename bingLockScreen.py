@@ -143,6 +143,8 @@ if __name__ == '__main__':
         if win_release == '7':
             set_up_windows_7_oem_background_reg()
             set_up_windows_7_oem_background_file()
+            # restart LogonUI to take effect.
+            os.system("taskkill /f /im  LogonUI.exe")
         else:
             print("Not Support version of Windows: {0}".format(win_release))
             exit(1)
