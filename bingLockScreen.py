@@ -77,10 +77,10 @@ def set_up_windows_7_oem_background_file():
     open( win7_oobe, 'wb').write(data)
 
     sha1 = hashlib.sha1(open(_a+_b+"authui.dll","rb").read())
-    hash = sha1.hexdigest()
+    hash_sum = sha1.hexdigest()
 
     for i in win_7_authui_dll_sha1_list:
-        if i.lower() == hash.lower():
+        if i.lower() == hash_sum.lower():
             if os.path.getsize(win7_oobe) >= 255 * 1024:
                 reduce_the_size(win7_oobe)
                 return
