@@ -41,7 +41,8 @@ def get_bing_today_homepage_data():
         try:
             bing_today_homepage_url = get_bing_today_homepage()
             return urllib.request.urlopen(bing_today_homepage_url).read()
-        except urllib.error.URLError:
+        except urllib.error.URLError as e :
+            print( e.reason() )
             print("Try again.")
         time.sleep(10)
         count += 1
@@ -81,7 +82,7 @@ def set_up_linux_background_file():
     bing_today_homepage = get_bing_today_homepage()
     data = get_bing_today_homepage_data()
     if data != None:
-        open(bing_lock_screen_file, 'w').write(data)
+        open(bing_lock_screen_file, 'wb').write(data)
 
 
 def set_up_ubuntu_lightdm_settting():
