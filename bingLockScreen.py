@@ -83,7 +83,10 @@ def set_up_windows_7_oem_background_file():
         if i.lower() == hash.lower():
             if os.path.getsize(win7_oobe) >= 255 * 1024:
                 reduce_the_size(win7_oobe)
+                return
             break
+
+    print("Don't need to resize the picutre size.")
 
 
 def set_up_linux_background_file():
