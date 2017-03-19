@@ -15,6 +15,8 @@ import time
 # 资源{"images":[{"url":"xxxx"}]}
 
 
+win_7_authui_dll_sha1_list = [ 'd5cc3bec12c801e11217acc6927e1e6e401fe208' ]
+
 
 def reduce_the_size(name):
     import PIL.Image
@@ -57,7 +59,9 @@ def set_up_windows_7_oem_background_reg():
 
 
 def set_up_windows_7_oem_background_file():
-    bing_today_homepage = get_bing_today_homepage_url()
+    data = get_bing_today_homepage_data()
+    if data is None:
+        return
     _a = os.environ['WINDIR'] + '\\'
     # 32 bit python.exe running on a windows 64 bit system
     if platform.machine() == 'AMD64' and platform.architecture()[0] == '32bit':
@@ -70,10 +74,16 @@ def set_up_windows_7_oem_background_file():
 
     if not os.path.exists(win7_oobe_dir):
         os.makedirs(win7_oobe_dir, exist_ok=True)
+    open( win7_oobe, 'wb').write(data)
 
-    urllib.request.urlretrieve(bing_today_homepage, win7_oobe)
-    if os.path.getsize(win7_oobe) >= 255 * 1024:
-        reduce_the_size(win7_oobe)
+    sha1 = hashlib.sha1(open(_a+_b+"authui.dll").read())
+    hash = sha1.hexdigest()
+
+    for i in win_7_authui_dll_sha1_list:
+        if i.lower() == hash.lower():
+            if os.path.getsize(win7_oobe) >= 255 * 1024:
+                reduce_the_size(win7_oobe)
+            break
 
 
 def set_up_linux_background_file():
@@ -125,7 +135,7 @@ if __name__ == '__main__':
     system = platform.system()
     if system.lower() == 'Windows'.lower():
         import winreg
-
+        import hashlib
         win_release = platform.win32_ver()[0]
         if win_release == '7':
             set_up_windows_7_oem_background_reg()
