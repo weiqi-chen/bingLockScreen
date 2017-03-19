@@ -2,10 +2,11 @@
 # coding: utf-8
 
 import urllib.request
+import urllib.error
 import json
 import os
 import platform
-
+import time
 
 # 必应获取美图的API：
 # （无水印）http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1
@@ -32,6 +33,19 @@ def get_bing_today_homepage():
     res = urllib.request.urlopen(host_prefix + bing_api_url).read().decode('utf8')  # 有时候，read()返回的是bytes，调用一下decode稳妥一些
     js = json.loads(res)
     return host_prefix + js['images'][0]['url']
+
+
+def get_bing_today_homepage_data():
+    count = 0
+    while count < 5:
+        try:
+            bing_today_homepage_url = get_bing_today_homepage()
+            return urllib.request.urlopen(bing_today_homepage_url).read()
+        except urllib.error.URLError:
+            print("Try again.")
+        time.sleep(10)
+        count += 1
+    return None
 
 
 def set_up_windows_7_oem_background_reg():
@@ -65,7 +79,9 @@ def set_up_windows_7_oem_background_file():
 def set_up_linux_background_file():
     global bing_lock_screen_file
     bing_today_homepage = get_bing_today_homepage()
-    urllib.request.urlretrieve(bing_today_homepage, bing_lock_screen_file)
+    data = get_bing_today_homepage_data()
+    if data != None:
+        open(bing_lock_screen_file, 'w').write(data)
 
 
 def set_up_ubuntu_lightdm_settting():
