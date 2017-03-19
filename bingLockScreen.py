@@ -79,7 +79,6 @@ def set_up_windows_7_oem_background_file():
 
 def set_up_linux_background_file():
     global bing_lock_screen_file
-    bing_today_homepage = get_bing_today_homepage()
     data = get_bing_today_homepage_data()
     if data != None:
         open(bing_lock_screen_file, 'wb').write(data)
