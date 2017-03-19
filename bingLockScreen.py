@@ -71,11 +71,9 @@ def set_up_linux_background_file():
 def set_up_ubuntu_lightdm_settting():
     global dist_ver
     major_ver = int(float(dist_ver))
-    if major_ver<=14:
-        print( "14.x version")
-    elif major_ver==16:
+    if 14 <= major_ver <= 16:
         import configparser
-        print( "16.x version")
+        print("14.x ~ 16.x version")
         # [com.canonical.unity-greeter]
         # draw-user-backgrounds=false
         # background='/foo/wallpaper.png'
@@ -83,7 +81,7 @@ def set_up_ubuntu_lightdm_settting():
 
         config_path = '/usr/share/glib-2.0/schemas/10_unity-settings-daemon.gschema.override'
         config = configparser.ConfigParser()
-        config.read( config_path)
+        config.read(config_path)
         need_to_compile_schemas = False
         if c_section not in config:
             need_to_compile_schemas = True
@@ -103,16 +101,16 @@ def set_up_ubuntu_lightdm_settting():
                 config[c_section]['background'] = "'/var/bing_lock_screen.jpg'"
                 need_to_compile_schemas = True
         if need_to_compile_schemas:
-            config.write(open(config_path,'w'))
+            config.write(open(config_path, 'w'))
             os.system("glib-compile-schemas /usr/share/glib-2.0/schemas/")
             print("You need to restart lightdm to take effect.")
-
 
 
 if __name__ == '__main__':
     system = platform.system()
     if system.lower() == 'Windows'.lower():
         import winreg
+
         win_release = platform.win32_ver()[0]
         if win_release == '7':
             set_up_windows_7_oem_background_reg()
